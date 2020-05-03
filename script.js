@@ -1,25 +1,41 @@
-let formIsValid = true;
-let inputsAll = document.querySelectorAll("input");
+// Variables
+let formIsValid;
+let inputs = document.querySelectorAll("input");
 let form = document.querySelector("#parking-form");
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
-  checkEmpty(); //we need to check each input to see if it's empty
+  isInputValid();
 });
 
 //HELPER FUNCTIONS//
 function markValid() {
-  formIsValid = true;
+  return (formIsValid = true);
 }
 function markInvalid() {
-  //   formIsValid = false;
+  return (formIsValid = false);
 }
 
 //validation functions//
-function checkEmpty() {
-  for (let input of inputsAll) {
-    if (input.value === "") {
+function checkValue(el) {
+  return el.value.trim() === "";
+}
+
+function isInputValid() {
+  for (let input of inputs) {
+    if (checkValue(input)) {
+      input.closest(".input-field").classList.add("input-invalid");
+      showError(input);
       markInvalid();
+    } else if (!checkValue(input)) {
+      input.closest(".input-field").classList.add("input-valid");
+      markValid();
     }
   }
+}
+
+function showError(el) {
+  let errorDiv = document.createElement("div");
+  errorDiv.innerText = "cannot be blank";
+  el.parentElement.appendChild(errorDiv);
 }
