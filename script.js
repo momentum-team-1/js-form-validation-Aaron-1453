@@ -35,7 +35,36 @@ function isInputValid() {
 }
 
 function showError(el) {
+  // create error message div
   let errorDiv = document.createElement("div");
-  errorDiv.innerText = "cannot be blank";
+  // initialize variable inputName for later use
+  let inputName;
+  // look for presence of el's previous sibling
+  if (el.previousElementSibling !== null) {
+    // inputName will equal inner text of previous sibling
+    inputName = el.previousElementSibling.innerText;
+    // if the previous sibling is null
+  } else if (el.previousElementSibling === null) {
+    inputName = el.placeholder;
+  }
+  errorDiv.innerText = inputName + " cannot be blank";
   el.parentElement.appendChild(errorDiv);
 }
+
+// for (let input of inputGroup) {
+//   // inputName will equal el's placeholder text
+//   inputName = input.placeholder;
+//   console.log(inputName);
+//   errorDiv.innerText = inputName + " cannot be blank";
+//   el.after(errorDiv);
+// }
+
+// else if (
+//   el.previousElementSibling === null &&
+//   el.parentElement.querySelectorAll(".input-group")
+// ) {
+//   console.log("here");
+//   inputName = el.placeholder;
+//   console.log(inputName);
+// }
+// return errorDiv, inputName;
