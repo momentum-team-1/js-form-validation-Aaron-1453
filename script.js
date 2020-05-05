@@ -2,6 +2,9 @@
 let formIsValid;
 let inputs = document.querySelectorAll("input");
 let form = document.querySelector("#parking-form");
+let carYearValue = document.querySelectorAll("#car-year");
+let carMakeValue = document.querySelectorAll("#car-make");
+let carModelValue = document.querySelectorAll("#car-model");
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -47,9 +50,22 @@ function showError(el) {
   } else if (el.previousElementSibling === null) {
     inputName = el.placeholder;
   }
+  //need something to clear the errorMsg//
+
   errorDiv.innerText = inputName + " cannot be blank";
   el.parentElement.appendChild(errorDiv);
 }
+
+function validateCarYear() {
+  if (!isNaN(carYearValue.value)) {
+    input.closest(".input-field").classList.add("input-valid");
+  }
+  if (isNaN(carYearValue.value)) {
+    input.closest(".input-field").classList.add("input-invalid");
+  }
+}
+
+// function validateCarModel() {}
 
 // for (let input of inputGroup) {
 //   // inputName will equal el's placeholder text
